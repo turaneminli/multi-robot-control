@@ -1,11 +1,17 @@
 const { validationResult } = require("express-validator");
 const Data = require("../models/Data");
 
-// not applied
 exports.getInstruction = (req, res, next) => {
-  res.status(200).json({
-    posts: [{ title: "Post Name", content: "This is content" }],
-  });
+  Data.find()
+    .then((result) => {
+      res.status(200).json({
+        message: "Successfully obtained data.",
+        data: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.postData = (req, res, next) => {
